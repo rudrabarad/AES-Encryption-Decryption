@@ -41,25 +41,23 @@ class Encryptor:
             fo.write(dec)
         os.remove(file_name)                            # to delete encrypted file
 
-    def getAllFiles(self):
-        dir_path = os.path.dirname(os.path.realpath(__file__))
+    def getAllFiles(self, folder_name):
         dirs = []
-        for dirName, subdirList, fileList in os.walk(dir_path):
+        for dirName, subdirList, fileList in os.walk(folder_name):
             for fname in fileList:
                 if (fname != 'script.py' and fname != 'data.txt.enc'):
                     dirs.append(dirName + "\\" + fname)
         return dirs
 
-    def encrypt_all_files(self):
-        dirs = self.getAllFiles()
+    def encrypt_all_files(self, folder_name):
+        dirs = self.getAllFiles(folder_name)
         for file_name in dirs:
             self.encrypt_file(file_name)
 
-    def decrypt_all_files(self):
-        dirs = self.getAllFiles()
+    def decrypt_all_files(self, folder_name):
+        dirs = self.getAllFiles(folder_name)
         for file_name in dirs:
             self.decrypt_file(file_name)
-
 
 
 key = b'[EX\xc8\xd5\xbfI{\xa2$\x05(\xd5\x18\xbf\xc0\x85)\x10nc\x94\x02)j\xdf\xcb\xc4\x94\x9d(\x9e'
@@ -84,17 +82,20 @@ if os.path.isfile('data.txt.enc'):                      # if data.txt.enc is not
               "3. Press '3' to Encrypt all files in the directory.\n"
               "4. Press '4' to decrypt all files in the directory.\n"
               "5. Press '5' to exit.\n")
-        choice = int(input("Please Enter your Choice : "))
-        clear()
-        if choice == 1:
+        choice = input("Please Enter your Choice : ")
+        if choice == "1":
             enc.encrypt_file(str(input("Enter name of file to encrypt: ")))
-        elif choice == 2:
+            break
+        elif choice == "2":
             enc.decrypt_file(str(input("Enter name of file to decrypt: ")))
-        elif choice == 3:
-            enc.encrypt_all_files()
-        elif choice == 4:
-            enc.decrypt_all_files()
-        elif choice == 5:
+            break
+        elif choice == "3":
+            enc.encrypt_all_files(str(input("Enter name of directory to encrypt: ")))
+            break
+        elif choice == "4":
+            enc.decrypt_all_files(str(input("Enter name of directory to encrypt: ")))
+            break
+        elif choice == "5":
             exit()
         else:
             print("Please select a valid option!")
