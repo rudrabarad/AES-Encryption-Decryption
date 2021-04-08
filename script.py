@@ -1,10 +1,6 @@
 from Crypto import Random                               # installing dependencies
 from Crypto.Cipher import AES
-import os
 import os.path
-from os import listdir
-from os.path import isfile, join
-import time
 
 class Encryptor:
     def __init__(self, key):                            # constructor in which key is passed as argument
@@ -60,28 +56,15 @@ class Encryptor:
             self.decrypt_file(file_name)
 
 
-key = b'[EX\xc8\xd5\xbfI{\xa2$\x05(\xd5\x18\xbf\xc0\x85)\x10nc\x94\x02)j\xdf\xcb\xc4\x94\x9d(\x9e'
-enc = Encryptor(key)
-clear = lambda: os.system('cls')                        # to clear screen
 
-if os.path.isfile('data.txt.enc'):                      # if data.txt.enc is not present it is created
+def aes_encryption_decryption():
+    print("\n1. Press '1' to Encrypt file.\n"
+          "2. Press '2' to Decrypt file.\n"
+          "3. Press '3' to Encrypt all files in a directory.\n"
+          "4. Press '4' to Decrypt all files in a directory.\n"
+          "5. Press '5' to Exit.\n"
+          )
     while True:
-        password = str(input("Enter password: "))       # password for user authentication
-        enc.decrypt_file("data.txt.enc")
-        p = ''
-        with open("data.txt", "r") as f:
-            p = f.readlines()
-        if p[0] == password:
-            enc.encrypt_file("data.txt")
-            break
-
-    while True:
-        clear = lambda: os.system('cls')
-        print("\n1. Press '1' to encrypt file.\n"
-              "2. Press '2' to decrypt file.\n"
-              "3. Press '3' to Encrypt all files in the directory.\n"
-              "4. Press '4' to decrypt all files in the directory.\n"
-              "5. Press '5' to exit.\n")
         choice = input("Please Enter your Choice : ")
         if choice == "1":
             enc.encrypt_file(str(input("Enter name of file to encrypt: ")))
@@ -98,23 +81,20 @@ if os.path.isfile('data.txt.enc'):                      # if data.txt.enc is not
         elif choice == "5":
             exit()
         else:
-            print("Please select a valid option!")
+            print("Please select a valid option!\n")
 
-else:
-    while True:
-        clear()
-        password = str(input("Setting up stuff. Enter a password : "))
-        repassword = str(input("Confirm password: "))
-        if password == repassword:
-            break
-        else:
-            print("Passwords Mismatched! Please Re-Enter the Password")
-    f = open("data.txt", "w+")
-    f.write(password)
-    f.close()
-    enc.encrypt_file("data.txt")
-    print("Please restart the program to complete the setup process...")
-    time.sleep(2)
+def enter_password():
+    password = input("\nEnter password to proceed : ")
+    if password == "cns":
+        aes_encryption_decryption()
+    else:
+        print("\nPassword in Icorrect.\nPlease re-enter the correct Password to proceed")
+        enter_password()
 
 
 
+key = b'[EX\xc8\xd5\xbfI{\xa2$\x05(\xd5\x18\xbf\xc0\x85)\x10nc\x94\x02)j\xdf\xcb\xc4\x94\x9d(\x9e'
+enc = Encryptor(key)
+
+print("\n| AES ENCRYPTION AND DECRYPTION\n|\n| Prepared by\n| 18DCS007 - RUDRA BARAD\n| 18DCS044 - ROHAN MEHTA")
+enter_password()
