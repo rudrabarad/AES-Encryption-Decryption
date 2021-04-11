@@ -1,6 +1,7 @@
 from Crypto import Random                               # installing dependencies
 from Crypto.Cipher import AES
 import os.path
+import time
 
 class Encryptor:
     def __init__(self, key):                            # constructor in which key is passed as argument
@@ -58,37 +59,51 @@ class Encryptor:
 
 
 def aes_encryption_decryption():
-    print("\n1. Press '1' to Encrypt file.\n"
-          "2. Press '2' to Decrypt file.\n"
-          "3. Press '3' to Encrypt all files in a directory.\n"
-          "4. Press '4' to Decrypt all files in a directory.\n"
-          "5. Press '5' to Exit.\n"
-          )
+
     while True:
+        print("\n1. Press '1' to Encrypt a file.\n"
+              "2. Press '2' to Decrypt a file.\n"
+              "3. Press '3' to Encrypt all the files in a directory.\n"
+              "4. Press '4' to Decrypt all the files in a directory.\n"
+              "5. Press '5' to Exit.\n"
+              )
         choice = input("Please Enter your Choice : ")
         if choice == "1":
-            enc.encrypt_file(str(input("Enter name of file to encrypt: ")))
-            break
+            file=input("\nEnter the name of a file to Encrypt: ")
+            time.sleep(2)
+            enc.encrypt_file(str(file))
+            print(file + " is ENCRYPTED.......100%")
+            time.sleep(2)
         elif choice == "2":
-            enc.decrypt_file(str(input("Enter name of file to decrypt: ")))
-            break
+            file = input("\nEnter the name of a file to Decrypt: ")
+            enc.decrypt_file(str(file))
+            time.sleep(2)
+            print(file + " is DECRYPTED.......100%")
+            time.sleep(2)
         elif choice == "3":
-            enc.encrypt_all_files(str(input("Enter name of directory to encrypt: ")))
-            break
+            dir = input("\nEnter name of the directory to Encrypt: ")
+            time.sleep(2)
+            enc.encrypt_all_files(str(dir))
+            print("All the files in "+ dir + " are ENCRYPTED.......100%")
+            time.sleep(2)
         elif choice == "4":
-            enc.decrypt_all_files(str(input("Enter name of directory to encrypt: ")))
-            break
+            dir = input("\nEnter name of the directory to Decrypt: ")
+            time.sleep(2)
+            enc.decrypt_all_files(str(dir))
+            print("All the files in "+ dir + " are DECRYPTED.......100%")
+            time.sleep(2)
+
         elif choice == "5":
             exit()
         else:
-            print("Please select a valid option!\n")
+            print("\nPlease select a valid option!")
 
 def enter_password():
     password = input("\nEnter password to proceed : ")
     if password == "cns":
         aes_encryption_decryption()
     else:
-        print("\nPassword in Icorrect.\nPlease re-enter the correct Password to proceed")
+        print("\nPassword is Icorrect.\nPlease re-enter the correct Password to proceed")
         enter_password()
 
 
