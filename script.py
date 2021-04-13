@@ -2,7 +2,7 @@ from Crypto import Random                               # installing dependencie
 from Crypto.Cipher import AES
 import os.path
 import time
-
+#pycryptodome
 class Encryptor:
     def __init__(self, key):                            # constructor in which key is passed as argument
         self.key = key                                  # key used will be string
