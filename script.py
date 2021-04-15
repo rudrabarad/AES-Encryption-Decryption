@@ -98,18 +98,12 @@ def aes_encryption_decryption():
         else:
             print("\nPlease select a valid option!")
 
-def enter_password():
-    password = input("\nEnter password to proceed : ")
-    if password == "cns":
-        aes_encryption_decryption()
-    else:
-        print("\nPassword is Icorrect.\nPlease re-enter the correct Password to proceed")
-        enter_password()
+
 
 
 
 key = b'[EX\xc8\xd5\xbfI{\xa2$\x05(\xd5\x18\xbf\xc0\x85)\x10nc\x94\x02)j\xdf\xcb\xc4\x94\x9d(\x9e'
 enc = Encryptor(key)
 
-print("\n| AES ENCRYPTION AND DECRYPTION\n|\n| Prepared by\n| 18DCS007 - RUDRA BARAD\n| 18DCS044 - ROHAN MEHTA")
-enter_password()
+print("\n| AES ENCRYPTION AND DECRYPTION\n|\n| Prepared by\n| 18DCS007 - RUDRA BARAD")
+aes_encryption_decryption()
